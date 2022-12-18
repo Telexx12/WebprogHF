@@ -52,16 +52,18 @@
     <title>Document</title>
 </head>
 <body>
-    Név: <label><?php echo $firstName . " ".$lastName?></label>
-    <?php $index = 0;?>
+    Név: <label style="margin-bottom: 10px;"><b><?php echo $firstName . " ".$lastName?></b></label>
+    <br>
    <?php foreach ($decoded as $line) : ?>
-
-        <table>
-            <tr>
-                <th>Sorszam</th>
-                <th>Termek neve</th>
-                <th>Termek ar</th>
-                <th>Termek mennyiseg</th>
+    <?php $index = 1;
+            $sum = 0;
+    ?>
+        <table style="border-collapse: collapse;">
+            <tr style="border:1px solid black">
+                <th style="border:1px solid black">Sorszam</th>
+                <th style="border:1px solid black">Termek neve</th>
+                <th style="border:1px solid black">Termek ar</th>
+                <th style="border:1px solid black">Termek mennyiseg</th>
             </tr>
             <?php foreach ($line['products'] as $product) :?>
                 <?php
@@ -83,18 +85,27 @@
                         $decoded3 = json_decode($resp3);
                         $title=($decoded3->title);
                         $price = $decoded3->price;
+
+                        $sum += $price*$quantity;
                     }
                     ?>
 
-                <tr>
-                    <td><?php echo $index ?></td>
-                    <td><?php echo $title ?></td>
-                    <td><?php echo $price?></td>
-                    <td><?php echo $quantity ?></td>
+                <tr style="border:1px solid black">
+                    <td style="text-align: center; border:1px solid black;"><?php echo $index ?></td>
+                    <td style="text-align: center; border:1px solid black;"><?php echo $title ?></td>
+                    <td style="text-align: center; border:1px solid black;"><?php echo $price?></td>
+                    <td style="text-align: center; border:1px solid black;"><?php echo $quantity ?></td>
                 </tr>
+
+                <?php
+                $index++;
+                ?>
             <?php endforeach ?>
         </table>
-        
+        <br>
+         <label style=""><b>Ar osszesen: <?php echo $sum ?></b></label>
+         <br>
+         <br>
 
         
     <?php endforeach ?>
